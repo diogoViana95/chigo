@@ -1,0 +1,4 @@
+import { auth } from '@/auth';
+import { redirect } from 'next/navigation';
+import { changePasswordAction } from '../actions';
+export default async function ChangePasswordPage(){const session=await auth();if(!session?.user)redirect('/backoffice/login');if(!(session.user as any).mustChangePassword)redirect('/backoffice');return <main className="admin-page"><div className="admin-card"><span className="eyebrow">SEGURANÇA DA CONTA</span><h1>Defina uma nova password.</h1><p>Por segurança, altere a password temporária para continuar.</p><form action={changePasswordAction}><label>Password atual<input type="password" name="currentPassword" required/></label><label>Nova password<input type="password" name="newPassword" minLength={10} required/></label><button className="primary-button full">Guardar password →</button></form></div></main>}

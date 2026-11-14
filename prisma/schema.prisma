@@ -1,0 +1,47 @@
+generator client {
+  provider   = "prisma-client"
+  output     = "../generated/prisma"
+  engineType = "client"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id                 String   @id @default(cuid())
+  username           String   @unique
+  passwordHash       String
+  mustChangePassword Boolean  @default(true)
+  createdAt          DateTime @default(now())
+}
+
+model Product {
+  id            String   @id @default(cuid())
+  slug          String   @unique
+  namePt        String
+  nameEn        String
+  descriptionPt String
+  descriptionEn String
+  category      String
+  price         Float
+  imageUrl      String?
+  featured      Boolean  @default(false)
+  published     Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Order {
+  id           String   @id @default(cuid())
+  reference    String   @unique
+  customerName String
+  phone        String
+  address      String?
+  notes        String?
+  status       String   @default("PENDING_CONTACT")
+  total        Float
+  items        Json
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
