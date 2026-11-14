@@ -14,7 +14,10 @@
 - Prisma Client is generated into `generated/prisma`. Import it from `@/generated/prisma/client` in app code.
 - Runtime queries use `@prisma/adapter-ppg` and the server-side `DATABASE_URL` connection string.
 - Never print, commit, or expose `.env` values. `.env` and `.env.local` are secrets and must remain ignored by Git.
-- After schema changes, regenerate the client and update the database with the appropriate Prisma command. `npm run db:setup` applies the schema and seeds initial records; `npm run db:seed` only seeds.
+- The current dev database was initially created with `db push`; the Prisma Migrate baseline has not yet been established. Before enabling automatic deploy migrations, create and review a baseline for that existing database without resetting it, then mark the baseline as applied on that dev database. A new, empty production database must apply the baseline normally.
+- After the baseline exists, use Prisma Migrate for every schema change intended to be shared or deployed: run `npx prisma migrate dev --name <descriptive_name>`, review the generated SQL, and commit both `prisma/schema.prisma` and the new `prisma/migrations/` directory. Do not use `db push` for production or for changes that need an automatic deployment history.
+- Deploy environments apply committed migrations with `npx prisma migrate deploy`. The planned Vercel Build Command is `npx prisma migrate deploy && npm run build`; it still needs to be configured in Vercel. Use separate `DATABASE_URL` values for Preview and Production.
+- `npm run db:setup` currently uses `db push` and seeds initial records; treat it only as a bootstrap command until the migration baseline/workflow is established. `npm run db:seed` only seeds.
 - Seed data provides the initial admin and example products. Avoid resetting existing credentials or data on subsequent seeds.
 
 ## Storefront and backoffice
