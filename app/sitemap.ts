@@ -1,2 +1,4 @@
 import type { MetadataRoute } from 'next';
-export default function sitemap(): MetadataRoute.Sitemap { return [{ url:'https://chigo.pt', lastModified:new Date(), changeFrequency:'weekly', priority:1 }, {url:'https://chigo.pt/#collection',lastModified:new Date(),changeFrequency:'weekly',priority:.8}]; }
+import { prisma } from '@/lib/prisma';
+import { products as starterProducts } from '@/lib/products';
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> { const items=await prisma.product.findMany({where:{published:true},select:{slug:true,updatedAt:true}}).catch(()=>[]);const urls=items.length?items.map(p=>({url:`https://chigo.pt/produtos/${p.slug}`,lastModified:p.updatedAt,changeFrequency:'monthly' as const,priority:.7})):starterProducts.map(p=>({url:`https://chigo.pt/produtos/${p.slug}`,lastModified:new Date(),changeFrequency:'monthly' as const,priority:.7}));return [{ url:'https://chigo.pt', lastModified:new Date(), changeFrequency:'weekly', priority:1 }, {url:'https://chigo.pt/#collection',lastModified:new Date(),changeFrequency:'weekly',priority:.8},...urls]; }

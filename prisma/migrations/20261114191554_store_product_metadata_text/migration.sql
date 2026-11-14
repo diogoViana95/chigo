@@ -1,0 +1,7 @@
+-- AlterTable
+ALTER TABLE "Product" ALTER COLUMN "imageUrls" SET NOT NULL,
+ALTER COLUMN "imageUrls" SET DEFAULT '[]',
+ALTER COLUMN "imageUrls" SET DATA TYPE TEXT,
+ALTER COLUMN "relatedProductIds" SET NOT NULL,
+ALTER COLUMN "relatedProductIds" SET DEFAULT '[]',
+ALTER COLUMN "relatedProductIds" SET DATA TYPE TEXT;
