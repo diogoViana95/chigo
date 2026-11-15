@@ -6,6 +6,19 @@
 
 html { scroll-behavior: smooth; scroll-padding-top: 5.5rem; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+@supports (view-transition-name: none) {
+  ::view-transition-group(*) {
+    animation-duration: 480ms;
+    animation-timing-function: cubic-bezier(.22, 1, .36, 1);
+  }
+  ::view-transition-group(.product-image-morph) {
+    animation-duration: 620ms;
+    animation-timing-function: cubic-bezier(.2, .75, .25, 1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*) { animation-duration: 1ms; }
+}
 
 :root {
   --background: #0b0b11;
@@ -38,7 +51,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 5.5rem; }
 }
 
 .light {
-  --background: #faf9fc;
+  --background: #ffffff;
   --foreground: #17151d;
   --card: #fff;
   --card-foreground: #17151d;
@@ -48,13 +61,13 @@ html { scroll-behavior: smooth; scroll-padding-top: 5.5rem; }
   --primary-foreground: #fff;
   --secondary: #f0edf4;
   --secondary-foreground: #25212c;
-  --muted: #f1eff4;
+  --muted: #f5f3f8;
   --muted-foreground: #716c79;
   --accent: #eee5fa;
   --accent-foreground: #52238c;
   --destructive: oklch(0.66 0.2 25);
-  --border: #e6e2eb;
-  --input: #ddd8e4;
+  --border: #e5e1eb;
+  --input: #d8d3df;
   --ring: #7938d1;
   --sidebar: #f5f2f8;
   --sidebar-foreground: #17151d;
