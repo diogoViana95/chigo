@@ -1,4 +1,7 @@
 export type ProductImage = { key: string; url: string; name?: string };
+function isAllowedProductImageUrl(url: string) {
+  return url.startsWith('https://') || /^\/product-[a-z0-9-]+\.jpg$/.test(url) || url === '/chigo-logo.png';
+}
 
 export function parseProductImages(value: unknown): ProductImage[] {
   let parsed: unknown = value;
@@ -7,8 +10,8 @@ export function parseProductImages(value: unknown): ProductImage[] {
   }
   if (!Array.isArray(parsed)) return [];
   return parsed.flatMap((item): ProductImage[] => {
-    if (typeof item === 'string' && item.startsWith('https://')) return [{ key: '', url: item }];
-    if (typeof item === 'object' && item !== null && 'url' in item && typeof item.url === 'string' && item.url.startsWith('https://')) {
+    if (typeof item === 'string' && isAllowedProductImageUrl(item)) return [{ key: '', url: item }];
+    if (typeof item === 'object' && item !== null && 'url' in item && typeof item.url === 'string' && isAllowedProductImageUrl(item.url)) {
       return [{ key: 'key' in item && typeof item.key === 'string' ? item.key : '', url: item.url, name: 'name' in item && typeof item.name === 'string' ? item.name : undefined }];
     }
     return [];

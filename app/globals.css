@@ -4,63 +4,66 @@
 
 @custom-variant dark (&:is(.dark *));
 
+html { scroll-behavior: smooth; scroll-padding-top: 5.5rem; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
 :root {
-  --background: oklch(0.99 0.003 286);
-  --foreground: oklch(0.19 0.015 286);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.19 0.015 286);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.19 0.015 286);
-  --primary: oklch(0.53 0.23 294);
-  --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.96 0.008 286);
-  --secondary-foreground: oklch(0.25 0.02 286);
-  --muted: oklch(0.96 0.006 286);
-  --muted-foreground: oklch(0.52 0.015 286);
-  --accent: oklch(0.95 0.025 294);
-  --accent-foreground: oklch(0.28 0.11 294);
+  --background: #0b0b11;
+  --foreground: #f7f6fb;
+  --card: #15151e;
+  --card-foreground: #f7f6fb;
+  --popover: #15151e;
+  --popover-foreground: #f7f6fb;
+  --primary: #a45cff;
+  --primary-foreground: #fff;
+  --secondary: #20202b;
+  --secondary-foreground: #f7f6fb;
+  --muted: #191923;
+  --muted-foreground: #aaa8b7;
+  --accent: #272033;
+  --accent-foreground: #d5b8ff;
   --destructive: oklch(0.58 0.23 27);
-  --border: oklch(0.91 0.008 286);
-  --input: oklch(0.91 0.008 286);
-  --ring: oklch(0.58 0.2 294);
+  --border: #2b2a35;
+  --input: #383642;
+  --ring: #a45cff;
   --radius: 0.75rem;
-  --sidebar: oklch(0.98 0.003 286);
-  --sidebar-foreground: oklch(0.19 0.015 286);
-  --sidebar-primary: oklch(0.53 0.23 294);
-  --sidebar-primary-foreground: oklch(0.99 0 0);
-  --sidebar-accent: oklch(0.95 0.025 294);
-  --sidebar-accent-foreground: oklch(0.28 0.11 294);
-  --sidebar-border: oklch(0.91 0.008 286);
-  --sidebar-ring: oklch(0.58 0.2 294);
+  --sidebar: #111119;
+  --sidebar-foreground: #f7f6fb;
+  --sidebar-primary: #a45cff;
+  --sidebar-primary-foreground: #fff;
+  --sidebar-accent: #272033;
+  --sidebar-accent-foreground: #d5b8ff;
+  --sidebar-border: #2b2a35;
+  --sidebar-ring: #a45cff;
 }
 
-.dark {
-  --background: oklch(0.16 0.012 286);
-  --foreground: oklch(0.96 0.005 286);
-  --card: oklch(0.2 0.014 286);
-  --card-foreground: oklch(0.96 0.005 286);
-  --popover: oklch(0.2 0.014 286);
-  --popover-foreground: oklch(0.96 0.005 286);
-  --primary: oklch(0.72 0.17 294);
-  --primary-foreground: oklch(0.17 0.02 286);
-  --secondary: oklch(0.25 0.015 286);
-  --secondary-foreground: oklch(0.94 0.005 286);
-  --muted: oklch(0.25 0.015 286);
-  --muted-foreground: oklch(0.69 0.014 286);
-  --accent: oklch(0.29 0.07 294);
-  --accent-foreground: oklch(0.91 0.08 294);
+.light {
+  --background: #faf9fc;
+  --foreground: #17151d;
+  --card: #fff;
+  --card-foreground: #17151d;
+  --popover: #fff;
+  --popover-foreground: #17151d;
+  --primary: #7938d1;
+  --primary-foreground: #fff;
+  --secondary: #f0edf4;
+  --secondary-foreground: #25212c;
+  --muted: #f1eff4;
+  --muted-foreground: #716c79;
+  --accent: #eee5fa;
+  --accent-foreground: #52238c;
   --destructive: oklch(0.66 0.2 25);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.63 0.18 294);
-  --sidebar: oklch(0.19 0.014 286);
-  --sidebar-foreground: oklch(0.96 0.005 286);
-  --sidebar-primary: oklch(0.72 0.17 294);
-  --sidebar-primary-foreground: oklch(0.17 0.02 286);
-  --sidebar-accent: oklch(0.29 0.07 294);
-  --sidebar-accent-foreground: oklch(0.91 0.08 294);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.63 0.18 294);
+  --border: #e6e2eb;
+  --input: #ddd8e4;
+  --ring: #7938d1;
+  --sidebar: #f5f2f8;
+  --sidebar-foreground: #17151d;
+  --sidebar-primary: #7938d1;
+  --sidebar-primary-foreground: #fff;
+  --sidebar-accent: #eee5fa;
+  --sidebar-accent-foreground: #52238c;
+  --sidebar-border: #e6e2eb;
+  --sidebar-ring: #7938d1;
 }
 
 @theme inline {
@@ -103,3 +106,7 @@
   * { @apply border-border outline-ring/50; }
   body { @apply bg-background text-foreground font-sans antialiased; }
 }
+
+.gradient-cta { background: linear-gradient(105deg, #a94dff 0%, #8155ff 48%, #19d4e5 100%); color: white; }
+.gradient-text { background: linear-gradient(100deg, #ba76ff, #24d9ec); background-clip: text; color: transparent; }
+.studio-glow { box-shadow: 0 0 0 1px rgba(177,91,255,.48), 0 22px 70px rgba(107,48,163,.12); }
